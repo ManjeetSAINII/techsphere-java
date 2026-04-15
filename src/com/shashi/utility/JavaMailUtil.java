@@ -1,7 +1,6 @@
 package com.shashi.utility;
 
 import java.util.Properties;
-import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -26,10 +25,8 @@ public class JavaMailUtil {
 		properties.put("mail.smtp.starttls.enable", "true");
 		properties.put("mail.smtp.port", "587");
 
-		ResourceBundle rb = ResourceBundle.getBundle("application");
-
-		String emailId = rb.getString("mailer.email");
-		String passWord = rb.getString("mailer.password");
+		String emailId = AppConfig.getRequired("mailer.email", "MAILER_EMAIL");
+		String passWord = AppConfig.getRequired("mailer.password", "MAILER_PASSWORD");
 
 		properties.put("mail.user", emailId);
 		properties.put("mail.password", passWord);
@@ -81,10 +78,8 @@ public class JavaMailUtil {
 		properties.put("mail.smtp.starttls.enable", "true");
 		properties.put("mail.smtp.port", "587");
 
-		ResourceBundle rb = ResourceBundle.getBundle("application");
-
-		String emailId = rb.getString("mailer.email");
-		String passWord = rb.getString("mailer.password");
+		String emailId = AppConfig.getRequired("mailer.email", "MAILER_EMAIL");
+		String passWord = AppConfig.getRequired("mailer.password", "MAILER_PASSWORD");
 
 		properties.put("mail.user", emailId);
 		properties.put("mail.password", passWord);

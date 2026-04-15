@@ -103,6 +103,53 @@ Step 10: Default Username And Password For Admin Is "admin@gmail.com" And "admin
 
 Step 11: The default Username And Password For User Is "guest@gmail.com" And "guest"
 
+## Deploying From GitHub
+
+The repo now supports deployment with environment variables, so you do not need to commit `src/application.properties`.
+
+### Recommended option: Railway
+
+Railway can deploy directly from a GitHub repo and also provides a managed MySQL service:
+- GitHub deploys: https://docs.railway.com/quick-start
+- Dockerfile builds: https://docs.railway.com/deploy/dockerfiles
+- MySQL service: https://docs.railway.com/guides/mysql
+- Public networking / ports: https://docs.railway.com/public-networking
+
+#### 1. Push these repo changes to GitHub
+- The build now creates `target/shopping-cart.war`, which matches the Dockerfile.
+- The app now reads config from environment variables first, with `application.properties` as an optional fallback.
+
+#### 2. Create a Railway project
+- In Railway, choose `New Project` and select `Deploy from GitHub repo`.
+- Select this repository.
+- Railway will detect and use the root `Dockerfile`.
+
+#### 3. Add a MySQL database
+- In the same Railway project, add a `MySQL` service.
+- Run the SQL in [databases/mysql_query.sql](./databases/mysql_query.sql) against that database.
+
+#### 4. Set web service variables
+- `PORT=8080`
+- `DB_CONNECTION_STRING=jdbc:mysql://${{MySQL.MYSQLHOST}}:${{MySQL.MYSQLPORT}}/${{MySQL.MYSQLDATABASE}}?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC`
+- `DB_USERNAME=${{MySQL.MYSQLUSER}}`
+- `DB_PASSWORD=${{MySQL.MYSQLPASSWORD}}`
+- `DB_DRIVER_NAME=com.mysql.cj.jdbc.Driver`
+- `MAILER_EMAIL=your-gmail-address`
+- `MAILER_PASSWORD=your-gmail-app-password`
+
+#### 5. Generate a public domain
+- Open the deployed web service in Railway.
+- Go to Networking and generate a public domain.
+- Railway should route traffic to port `8080`. If it does not, set the target port to `8080`.
+
+#### 6. Login after deploy
+- Admin: `admin@gmail.com` / `admin`
+- User: `guest@gmail.com` / `guest`
+
+### Optional local fallback
+
+If you still want file-based config for local Tomcat/Eclipse setup, copy [src/application.properties.example](./src/application.properties.example) to `src/application.properties` and fill in your values. That file is already ignored by git.
+
 ## FAQ
 **Question:1** Unable to Connect to Database?
 
@@ -148,6 +195,5 @@ Note:- This is a Sample Project for learning purpose, we have not much considere
 
 - Class Diagram
 <img width="589" alt="image" src="https://github.com/shashirajraja/shopping-cart/assets/34605595/d6dbfdb9-5108-4071-b4b6-d055f0370acd">
-
 
 

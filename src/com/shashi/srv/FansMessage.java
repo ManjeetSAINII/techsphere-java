@@ -38,7 +38,7 @@ public class FansMessage extends HttpServlet {
 		if ("SUCCESS".equals(message)) {
 			message = "Comments Sent Successfully";
 		} else {
-			message = "Failed: Please Configure mailer.email and password in application.properties first";
+			message = "Failed: Please configure MAILER_EMAIL and MAILER_PASSWORD, or set them in application.properties";
 		}
 		RequestDispatcher rd = request.getRequestDispatcher("index.jsp");
 

@@ -1,0 +1,6 @@
+db.connectionString=jdbc:mysql://localhost:3306/shopping-cart?user=root&password=admin
+db.driverName=com.mysql.cj.jdbc.Driver
+db.username=root
+db.password=admin
+mailer.email=your-email@gmail.com
+mailer.password=your-gmail-app-password
