@@ -1,6 +1,7 @@
-db.connectionString=jdbc:mysql://localhost:3306/shopping-cart?user=root&password=admin
+db.connectionString=jdbc:mysql://monorail.proxy.rlwy.net:28263/shopping-cart
 db.driverName=com.mysql.cj.jdbc.Driver
 db.username=root
-db.password=admin
+db.password=SgrcPWcWhPHMacwfBEVwXgVhRwHqfKxJ
+
 mailer.email=your-email@gmail.com
 mailer.password=your-gmail-app-password

@@ -90,11 +90,6 @@ CREATE TABLE IF NOT EXISTS `shopping-cart`.`transactions` (
     FOREIGN KEY (`username`)
     REFERENCES `shopping-cart`.`user` (`email`)
     ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `transorderid`
-    FOREIGN KEY (`transid`)
-    REFERENCES `shopping-cart`.`orders` (`orderid`)
-    ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4
@@ -237,4 +232,3 @@ USE `shopping-cart`;
 INSERT INTO `shopping-cart`.`usercart` (`username`, `prodid`, `quantity`) VALUES ('guest@gmail.com', 'P20230423082243', 2);
 
 COMMIT;
-
