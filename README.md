@@ -1,8 +1,7 @@
 # TechSphere Java E-Commerce App
 
 ## 🚀 Live Demo
-
-https://techsphere-java-production.up.railway.app
+https://manjeet-techsphere.up.railway.app
 
 ## 🛠 Tech Stack
 
