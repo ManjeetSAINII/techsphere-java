@@ -1,7 +1,7 @@
-db.connectionString=jdbc:mysql://monorail.proxy.rlwy.net:28263/shopping-cart
+db.connectionString=jdbc:mysql://gateway01.ap-southeast-1.prod.alicloud.tidbcloud.com:4000/shopping-cart?sslMode=VERIFY_IDENTITY&enabledTLSProtocols=TLSv1.2
 db.driverName=com.mysql.cj.jdbc.Driver
-db.username=root
-db.password=SgrcPWcWhPHMacwfBEVwXgVhRwHqfKxJ
-
+db.username=2fpM3kv8Aw85gWz.root
+db.password=tJR4rVtm9svXnTSR
 mailer.email=your-email@gmail.com
 mailer.password=your-gmail-app-password
+server.port=${PORT:8080}
