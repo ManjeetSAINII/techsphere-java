@@ -1,14 +1,14 @@
 # TechSphere Java E-Commerce App
 
 ## 🚀 Live Demo
-https://manjeet-techsphere.up.railway.app
+https://techsphere-java.onrender.com
 
 ## 🛠 Tech Stack
 
 * Java (JSP/Servlet)
-* MySQL (Railway)
+* MySQL (TiDB)
 * Apache Tomcat
-* Railway (Deployment)
+* Render (Deployment)
 
 ## ✨ Features
 
@@ -29,4 +29,4 @@ https://manjeet-techsphere.up.railway.app
 
 ## 🌐 Deployment
 
-Deployed on Railway with MySQL integration
+Deployed on Render with MySQL integration(TiDB)
