@@ -1,0 +1,23 @@
+services:
+  app:
+    image: sainimanjeet/shopping-cart-app
+    container_name: shopping-cart-app
+    ports:
+      - "8080:8080"
+    depends_on:
+      - db
+    environment:
+      - DB_CONNECTION_STRING=jdbc:mysql://db:3306/shopping-cart
+      - DB_USERNAME=${DB_USERNAME}
+      - DB_PASSWORD=${DB_PASSWORD}
+
+  db:
+    image: mysql:8
+    container_name: mysql-db
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+      MYSQL_DATABASE: shopping-cart
+    ports:
+      - "3307:3306"
+    volumes:
+      - ./databases/mysql_query.sql:/docker-entrypoint-initdb.d/init.sql
