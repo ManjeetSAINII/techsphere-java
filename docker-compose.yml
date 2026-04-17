@@ -10,6 +10,8 @@ services:
       - DB_CONNECTION_STRING=jdbc:mysql://db:3306/shopping-cart
       - DB_USERNAME=${DB_USERNAME}
       - DB_PASSWORD=${DB_PASSWORD}
+      - MAILER_EMAIL=${MAILER_EMAIL}
+      - MAILER_PASSWORD=${MAILER_PASSWORD}
 
   db:
     image: mysql:8

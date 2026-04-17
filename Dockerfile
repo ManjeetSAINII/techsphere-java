@@ -9,6 +9,7 @@ COPY WebContent ./WebContent
 RUN mvn clean package -DskipTests
 
 FROM tomcat:9.0
+RUN rm -rf /usr/local/tomcat/webapps/*
 
 COPY --from=builder /app/target/shopping-cart.war /usr/local/tomcat/webapps/ROOT.war
 
