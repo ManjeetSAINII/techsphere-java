@@ -5,126 +5,114 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Cart Details</title>
+<title>Cart &mdash; TechSphere</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
 <link rel="stylesheet" href="css/changes.css">
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
-<link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 </head>
-<body style="background-color: #cee5f2;">
+<body>
 
-	<%
-	/* Checking the user credentials */
-	String userName = (String) session.getAttribute("username");
-	String password = (String) session.getAttribute("password");
+<%
+String userName = (String) session.getAttribute("username");
+String password = (String) session.getAttribute("password");
 
-	if (userName == null || password == null) {
+if (userName == null || password == null) {
+    response.sendRedirect("login.jsp?message=Session Expired, Login Again!!");
+}
 
-		response.sendRedirect("login.jsp?message=Session Expired, Login Again!!");
+String addS = request.getParameter("add");
+if (addS != null) {
+    int add = Integer.parseInt(addS);
+    String uid = request.getParameter("uid");
+    String pid = request.getParameter("pid");
+    int avail   = Integer.parseInt(request.getParameter("avail"));
+    int cartQty = Integer.parseInt(request.getParameter("qty"));
+    CartServiceImpl cart = new CartServiceImpl();
+    if (add == 1) {
+        cartQty += 1;
+        if (cartQty <= avail) {
+            cart.addProductToCart(uid, pid, 1);
+        } else {
+            response.sendRedirect("./AddtoCart?pid=" + pid + "&pqty=" + cartQty);
+        }
+    } else if (add == 0) {
+        cart.removeProductFromCart(uid, pid);
+    }
+}
+%>
 
-	}
+<jsp:include page="header.jsp" />
 
-	String addS = request.getParameter("add");
-	if (addS != null) {
+<!-- Cart title -->
+<div class="cart-title">
+	<i class="fa fa-shopping-cart" style="width:auto;height:auto;font-size:12px;margin-right:7px;color:#4f46e5;"></i>
+	Shopping Cart
+</div>
 
-		int add = Integer.parseInt(addS);
-		String uid = request.getParameter("uid");
-		String pid = request.getParameter("pid");
-		int avail = Integer.parseInt(request.getParameter("avail"));
-		int cartQty = Integer.parseInt(request.getParameter("qty"));
-		CartServiceImpl cart = new CartServiceImpl();
-
-		if (add == 1) {
-			//Add Product into the cart
-			cartQty += 1;
-			if (cartQty <= avail) {
-		cart.addProductToCart(uid, pid, 1);
-			} else {
-		response.sendRedirect("./AddtoCart?pid=" + pid + "&pqty=" + cartQty);
-			}
-		} else if (add == 0) {
-			//Remove Product from the cart
-			cart.removeProductFromCart(uid, pid);
-		}
-	}
-	%>
-
-
-
-	<jsp:include page="header.jsp" />
-
-	<div class="text-center"
-		style="color: black; font-size: 24px; font-weight: bold;">Cart
-		Items</div>
-	<!-- <script>document.getElementById('mycart').innerHTML='<i data-count="20" class="fa fa-shopping-cart fa-3x icon-white badge" style="background-color:#333;margin:0px;padding:0px; margin-top:5px;"></i>'</script>
- -->
-	<!-- Start of Product Items List -->
-	<div class="container">
-
+<div class="container" style="padding-bottom:48px;">
+	<div class="cart-wrap">
 		<table class="table table-hover">
-			<thead
-				style="background-color: #186188; color: white; font-size: 16px; font-weight: bold;">
+			<thead>
 				<tr>
-					<th>Picture</th>
-					<th>Products</th>
-					<th>Price</th>
-					<th>Quantity</th>
-					<th>Add</th>
-					<th>Remove</th>
-					<th>Amount</th>
+					<th style="width:70px;">Image</th>
+					<th>Product</th>
+					<th>Unit Price</th>
+					<th>Qty</th>
+					<th style="width:44px;text-align:center;">+</th>
+					<th style="width:44px;text-align:center;">&minus;</th>
+					<th>Subtotal</th>
 				</tr>
 			</thead>
-			<tbody
-				style="background-color: white; font-size: 15px; font-weight: bold;">
-
-
+			<tbody>
 
 				<%
 				CartServiceImpl cart = new CartServiceImpl();
-				List<CartBean> cartItems = new ArrayList<CartBean>();
-				cartItems = cart.getAllCartItems(userName);
+				List<CartBean> cartItems = cart.getAllCartItems(userName);
 				double totAmount = 0;
+
 				for (CartBean item : cartItems) {
-
-					String prodId = item.getProdId();
-
+					String prodId   = item.getProdId();
 					int prodQuantity = item.getQuantity();
-
 					ProductBean product = new ProductServiceImpl().getProductDetails(prodId);
-
 					double currAmount = product.getProdPrice() * prodQuantity;
-
 					totAmount += currAmount;
 
 					if (prodQuantity > 0) {
 				%>
 
 				<tr>
-					<td><img src="./ShowImage?pid=<%=product.getProdId()%>"
-						style="width: 50px; height: 50px;"></td>
-					<td><%=product.getProdName()%></td>
-					<td><%=product.getProdPrice()%></td>
-					<td><form method="post" action="./UpdateToCart">
-							<input type="number" name="pqty" value="<%=prodQuantity%>"
-								style="max-width: 70px;" min="0"> <input type="hidden"
-								name="pid" value="<%=product.getProdId()%>"> <input
-								type="submit" name="Update" value="Update"
-								style="max-width: 80px;">
-						</form></td>
-					<td><a
-						href="cartDetails.jsp?add=1&uid=<%=userName%>&pid=<%=product.getProdId()%>&avail=<%=product.getProdQuantity()%>&qty=<%=prodQuantity%>"><i
-							class="fa fa-plus"></i></a></td>
-					<td><a
-						href="cartDetails.jsp?add=0&uid=<%=userName%>&pid=<%=product.getProdId()%>&avail=<%=product.getProdQuantity()%>&qty=<%=prodQuantity%>"><i
-							class="fa fa-minus"></i></a></td>
-					<td><%=currAmount%></td>
+					<td>
+						<img class="cart-img" src="./ShowImage?pid=<%=product.getProdId()%>" alt="<%=product.getProdName()%>">
+					</td>
+					<td style="font-weight:600;color:#0f172a;"><%=product.getProdName()%></td>
+					<td style="color:#4f46e5;font-weight:700;">&#8377;&nbsp;<%=product.getProdPrice()%></td>
+					<td>
+						<form method="post" action="./UpdateToCart" class="qty-form">
+							<input type="number" name="pqty" value="<%=prodQuantity%>" min="0">
+							<input type="hidden" name="pid" value="<%=product.getProdId()%>">
+							<input type="submit" value="Update">
+						</form>
+					</td>
+					<td style="text-align:center;">
+						<a class="cart-icon-btn"
+							href="cartDetails.jsp?add=1&uid=<%=userName%>&pid=<%=product.getProdId()%>&avail=<%=product.getProdQuantity()%>&qty=<%=prodQuantity%>">
+							<i class="fa fa-plus" style="width:auto;height:auto;font-size:13px;"></i>
+						</a>
+					</td>
+					<td style="text-align:center;">
+						<a class="cart-icon-btn"
+							href="cartDetails.jsp?add=0&uid=<%=userName%>&pid=<%=product.getProdId()%>&avail=<%=product.getProdQuantity()%>&qty=<%=prodQuantity%>">
+							<i class="fa fa-minus" style="width:auto;height:auto;font-size:13px;"></i>
+						</a>
+					</td>
+					<td style="font-weight:700;">&#8377;&nbsp;<%=currAmount%></td>
 				</tr>
 
 				<%
@@ -132,36 +120,51 @@
 				}
 				%>
 
-				<tr style="background-color: grey; color: white;">
-					<td colspan="6" style="text-align: center;">Total Amount to
-						Pay (in Rupees)</td>
-					<td><%=totAmount%></td>
+				<!-- Total row -->
+				<tr class="cart-total-row">
+					<td colspan="6" style="text-align:right;letter-spacing:0.5px;">
+						<i class="fa fa-tag" style="width:auto;height:auto;font-size:13px;margin-right:6px;color:#4f46e5;"></i>
+						Total Amount (INR)
+					</td>
+					<td class="cart-total-amount">&#8377;&nbsp;<%=totAmount%></td>
 				</tr>
+
 				<%
 				if (totAmount != 0) {
 				%>
-				<tr style="background-color: grey; color: white;">
-					<td colspan="4" style="text-align: center;">
-					<td><form method="post">
-							<button formaction="userHome.jsp"
-								style="background-color: black; color: white;">Cancel</button>
-						</form></td>
-					<td colspan="2" align="center"><form method="post">
-							<button style="background-color: blue; color: white;"
-								formaction="payment.jsp?amount=<%=totAmount%>">Pay Now</button>
-						</form></td>
 
+				<!-- Action row -->
+				<tr class="cart-action-row">
+					<td colspan="4"></td>
+					<td colspan="1">
+						<form method="post">
+							<button formaction="userHome.jsp" class="btn btn-danger"
+								style="border-radius:8px;font-size:12px;padding:7px 14px;">
+								<i class="fa fa-times" style="width:auto;height:auto;font-size:12px;margin-right:5px;"></i>Cancel
+							</button>
+						</form>
+					</td>
+					<td colspan="2" style="text-align:right;">
+						<form method="post">
+							<button class="btn btn-primary"
+								style="border-radius:8px;font-size:12px;padding:7px 18px;"
+								formaction="payment.jsp?amount=<%=totAmount%>">
+								<i class="fa fa-credit-card" style="width:auto;height:auto;font-size:12px;margin-right:5px;"></i>Pay &#8377;&nbsp;<%=totAmount%>
+							</button>
+						</form>
+					</td>
 				</tr>
+
 				<%
 				}
 				%>
+
 			</tbody>
 		</table>
 	</div>
-	<!-- ENd of Product Items List -->
+</div>
 
-
-	<%@ include file="footer.html"%>
+<%@ include file="footer.html"%>
 
 </body>
 </html>

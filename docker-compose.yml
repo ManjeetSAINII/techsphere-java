@@ -1,6 +1,6 @@
 services:
   app:
-    image: sainimanjeet/shopping-cart-app
+    image: sainimanjeet/shopping-cart-app:latest
     container_name: shopping-cart-app
     ports:
       - "8080:8080"

@@ -1,72 +1,105 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>TECH SPHERE</title>
+<title>TechSphere</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 <link rel="stylesheet" href="css/changes.css">
 </head>
-<body style="background-color: #cee5f2;">
-	<!-- Start the footer Contacts -->
-	<!-- <a name="contact"></a> -->
-	<div class="container-fluid"
-		style="background-color: #e85d04; color: white; margin-top: 200px;">
-		<div class="container">
-			<h3 class="text-center">Contact Us</h3>
-			<p class="text-center">
-				<em>We love our Customers!</em>
-			</p>
-			<div class="row test">
-				<div class="col-md-4">
-					<p>Drop a note.</p>
-					<p>
-						<span class="glyphicon glyphicon-map-marker"></span>TECH SPHERE
-					</p>
-					<p>
-						<span class="glyphicon glyphicon-phone"></span>Phone: +91
-						987654321
-					</p>
-					<p>
-						<span class="glyphicon glyphicon-envelope"></span>Email:
-						techsphere@gmail.com
-					</p>
-					<p>
-						<span class="glyphicon glyphicon-copyright-mark"></span>
-						Tech Sphere Team
-					</p>
+<body>
+
+<footer class="site-footer">
+	<div class="container footer-inner">
+		<div class="row">
+
+			<!-- Brand + contact -->
+			<div class="col-md-4 col-sm-6">
+				<p class="footer-section-title">TechSphere</p>
+				<h3>&#x26a1; Tech Sphere</h3>
+				<p class="footer-tagline">Your trusted tech destination in India.</p>
+
+				<div class="contact-item">
+					<span class="glyphicon glyphicon-map-marker"></span>
+					<span>TechSphere HQ, Mumbai, India</span>
 				</div>
-				<div class="col-md-8">
-					<form action="fansMessage" method="post">
-						<div class="row">
-							<div class="col-sm-6 form-group">
-								<input class="form-control" id="name" name="name"
-									placeholder="Name" type="text" required>
-							</div>
-							<div class="col-sm-6 form-group">
-								<input class="form-control" id="email" name="email"
-									placeholder="Email" type="email" required>
-							</div>
-						</div>
-						<textarea class="form-control" id="comments" name="comments"
-							placeholder="Comment" rows="5" required></textarea>
-						<div class="row">
-							<div class="col-md-12 form-group">
-								<button class="btn pull-right" type="submit">Send</button>
-							</div>
-						</div>
-					</form>
+				<div class="contact-item">
+					<span class="glyphicon glyphicon-phone"></span>
+					<span>+91 987 654 3210</span>
+				</div>
+				<div class="contact-item">
+					<span class="glyphicon glyphicon-envelope"></span>
+					<span>techsphere@gmail.com</span>
+				</div>
+				<div class="contact-item">
+					<span class="glyphicon glyphicon-copyright-mark"></span>
+					<span>2024 Tech Sphere Team</span>
 				</div>
 			</div>
+
+			<!-- Quick links -->
+			<div class="col-md-2 col-sm-6">
+				<p class="footer-section-title">Shop</p>
+				<ul style="list-style:none;padding:0;margin:0;">
+					<li style="margin-bottom:10px;"><a href="index.jsp?type=mobile" style="color:#94a3b8;text-decoration:none;font-size:13px;transition:color 0.15s;">Mobiles</a></li>
+					<li style="margin-bottom:10px;"><a href="index.jsp?type=laptop" style="color:#94a3b8;text-decoration:none;font-size:13px;">Laptops</a></li>
+					<li style="margin-bottom:10px;"><a href="index.jsp?type=tv" style="color:#94a3b8;text-decoration:none;font-size:13px;">TVs</a></li>
+					<li style="margin-bottom:10px;"><a href="index.jsp?type=camera" style="color:#94a3b8;text-decoration:none;font-size:13px;">Cameras</a></li>
+					<li style="margin-bottom:10px;"><a href="index.jsp?type=speaker" style="color:#94a3b8;text-decoration:none;font-size:13px;">Speakers</a></li>
+					<li style="margin-bottom:10px;"><a href="index.jsp?type=tablet" style="color:#94a3b8;text-decoration:none;font-size:13px;">Tablets</a></li>
+				</ul>
+			</div>
+
+			<!-- Account links -->
+			<div class="col-md-2 col-sm-6">
+				<p class="footer-section-title">Account</p>
+				<ul style="list-style:none;padding:0;margin:0;">
+					<li style="margin-bottom:10px;"><a href="login.jsp" style="color:#94a3b8;text-decoration:none;font-size:13px;">Login</a></li>
+					<li style="margin-bottom:10px;"><a href="register.jsp" style="color:#94a3b8;text-decoration:none;font-size:13px;">Register</a></li>
+					<li style="margin-bottom:10px;"><a href="cartDetails.jsp" style="color:#94a3b8;text-decoration:none;font-size:13px;">Cart</a></li>
+					<li style="margin-bottom:10px;"><a href="orderDetails.jsp" style="color:#94a3b8;text-decoration:none;font-size:13px;">My Orders</a></li>
+					<li style="margin-bottom:10px;"><a href="userProfile.jsp" style="color:#94a3b8;text-decoration:none;font-size:13px;">Profile</a></li>
+				</ul>
+			</div>
+
+			<!-- Contact form -->
+			<div class="col-md-4 col-sm-6">
+				<p class="footer-section-title">Send a Message</p>
+				<form action="fansMessage" method="post">
+					<div class="row">
+						<div class="col-sm-6 form-group" style="padding-right:6px;">
+							<input class="form-control" name="name" placeholder="Your name" type="text" required
+								style="margin-bottom:8px;">
+						</div>
+						<div class="col-sm-6 form-group" style="padding-left:6px;">
+							<input class="form-control" name="email" placeholder="Email" type="email" required
+								style="margin-bottom:8px;">
+						</div>
+					</div>
+					<textarea class="form-control" name="comments" placeholder="Your message&hellip;" rows="4" required
+						style="margin-bottom:10px;resize:vertical;"></textarea>
+					<button class="btn btn-primary pull-right" type="submit"
+						style="border-radius:8px;padding:9px 22px;font-size:13px;">
+						<i class="fa fa-paper-plane" style="width:auto;height:auto;font-size:13px;margin-right:6px;"></i>Send
+					</button>
+				</form>
+			</div>
+
 		</div>
+
+		<hr class="footer-divider">
+
+		<p class="footer-copy">
+			&copy; 2024 TechSphere &mdash; Built with &hearts; for tech lovers &nbsp;&bull;&nbsp; All rights reserved.
+		</p>
 	</div>
-	<!-- End of Contact or about us -->
+</footer>
 
 </body>
 </html>
